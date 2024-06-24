@@ -1,0 +1,148 @@
+
+h3 {
+    @include Shadow($colorOrange)
+}
+
+/*_______________________FADE IN sections*/
+
+.banner,
+.site p {
+    @include fade_in('fadeInSlideDown',(-$fade_in_Y));
+}
+
+.fadeInDbUp,
+.banner .logo img {
+    @include fade_in('fadeInSlideDoubleUp', calc(2 * $fade_in_Y));
+}
+
+//classe observée par section
+.fadeSlideUp {
+    @include fade_in('fadeInSlideUp', $fade_in_Y);
+}
+
+/* ___________________FLOWERS*/
+//ajustement flex pour overflow
+#studio {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    & h2{
+        justify-content: center;
+        display: flex;
+    }
+}
+
+/*contraste background/fleurs blanches*/
+.story h2::after,
+#event::before,
+.site-footer::before {
+    filter: drop-shadow(0 0 0.15rem darken($color__bg,10%));
+}
+
+/*_________________ rotate flowers*/
+.story h2::after,
+.story__article::after,
+#studio h2::before,
+#studio h2::after,
+.site-footer::before,
+.site-footer::after {
+    @include rotate_infinite (var(--rotateTime)) ;
+    line-height: 0px;
+    transform-origin: center;
+}
+
+.site-footer ul::after {
+    @include rotate_infinite(50s);
+}
+
+/*____SLIDE UP titres sections sur span h2*/
+.slideUp {
+    @include fade_in('fadeInMiddle', calc($fade_in_Y / 2));
+}
+//ajustement
+.story h2{
+        display: flex;
+    justify-content: center;
+}
+
+/*_________________________Banner | video*/
+.banner{
+    position: relative;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include Position(absolute, 0, 0, 0, 0);
+    z-index: 1;
+}
+
+.background-video {
+    object-fit: cover;
+    @include Position(relative, 0, 0, 0, 0);
+    z-index: -1;
+    list-style: fallback-video;
+    display: none;
+}
+
+@counter-style fallback-video {
+        fallback: url("../../foce/assets/images/banner.png" )
+}
+
+.floating{
+    animation: floating 4s ease-in-out 0s infinite
+}
+
+@keyframes floating{
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }  
+    100% {
+        transform: translateY(0px);
+    }
+}
+/*__________________slider characters */
+
+.story #characters {
+    flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+    & div{
+        flex: none;
+    }
+}
+#characters h3 {
+    text-align: left;
+    background-position: left;
+    padding: 1em;
+}
+.swipper-wrapper {
+    transition-duration: 50ms !important;
+}
+
+/*_________________________nuages & place*/
+
+#place {
+    background-image: url('../assets/images/Studio_Koukaki-image_place.png') !important;
+    margin-top: -50px;
+    & div {
+        margin-top: 170px;
+    }
+    & .bigCloud {
+        position: relative;
+        left: 950px;        
+        bottom:420px;
+        filter: blur(10px);
+        z-index: 1;
+    }
+    & .littleCloud {
+        position: relative;
+        left: 730px;      
+        bottom:360px;
+        filter: blur(12px);
+    }
+}

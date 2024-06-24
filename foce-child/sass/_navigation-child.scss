@@ -1,0 +1,156 @@
+/*_________________________menu*/
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    & button {
+        padding-right:10% ;
+    }
+    & .site-title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 4em;
+        padding-right: 4em;
+        text-align: center;
+    }
+}
+
+.burgerMenu {
+    position: absolute;
+    right: 0;
+    &.active {
+        & .line:nth-child(1){
+            transform: translateY(5px) rotate(45deg);
+        }
+        & .line:nth-child(2){
+            transform:  rotate(-45deg);
+        }
+        & .line:nth-child(3){
+            opacity: 0;
+        }
+    } 
+}
+
+.fullScreenMenu {
+    display: none;
+    @include Position(absolute, 80px, 0, 0, 0);
+    background-color: $color__bg;
+    height: calc(100vh - 80px);
+    max-height: 900px;
+    overflow: hidden;
+    &.open{
+        display: block;
+    }
+}
+
+/*toggle du menu*/
+.fullMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & img {
+        width: 150px !important;
+        margin-top: 2%;
+        margin-bottom: 4%;
+        filter: drop-shadow(0 0 0.4rem $colorOrange);
+    } 
+    & p {
+        font-family: "roboto mono";
+        font-size: 18px;
+        font-weight: 400;
+        text-align: center;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 0;
+        width: 100%;        
+    }    
+}
+
+/*syntaxe navigation du thème parent*/
+.main-navigation ul {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    z-index: 3;     
+    & a {
+        z-index: 3;    
+        font-size: 4.5em;
+        line-height: 2.1;
+        @include fade_in('fadeInSlideDoubleUp', calc(2 * $fade_in_Y));
+        &:hover{
+            text-shadow:  saturate($colorOrange, 100%) 0px 0px 18px; 
+        }
+    }
+}      
+
+.fadeInDown
+{
+    @include fade_in('fadeInSlideDown',(-80px));
+}
+
+.fadeOut {
+    animation:  fadeOut  ease $fade_in_time;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(80);
+    }
+}
+
+/* les arrières plans du menu*/
+.flowersMenu{
+    & .orchid{
+        @include Position(absolute, 10%, 0, 0, -5%);
+    }
+    & .sunflower{
+        @include Position(absolute, 12%, 0, 0, 78%);
+        filter: drop-shadow(0 0 0.15rem darken($color__bg,10%));
+        scale: 1.3;
+    }
+    & .randomFlower{
+        @include Position(absolute, 35%, 0, 0, 93%);
+        scale: 0.5;
+    }
+    & .flower{
+        @include Position(absolute, 50%, 0, 0, 13%);
+        scale: 0.7;
+    }
+    & .hibiscus{
+        @include Position(absolute, 66%, 0, 0, 77%);
+        @include rotate_infinite (50s) ;
+    }
+    & img{
+        @include rotate_infinite (20s) ;
+        line-height: 0px;
+        transform-origin: center;   
+    }
+}
+
+.catsMenu{
+    & .Kawaneko{
+        @include Position(absolute, 18%, 0, 0, 20%);
+        z-index: 2;
+    }
+    & .Jaakuna{
+        @include Position(absolute, 55%, 0, 0, 75%);
+        animation-delay: 1s
+    }
+    & .Orenjiiro{
+        @include Position(absolute, 80%, 0, 0, 7%);
+        animation-delay: 2s
+    }
+    & img{
+        animation: floating 3s ease-in-out 0s infinite
+    }
+}   
+
+
